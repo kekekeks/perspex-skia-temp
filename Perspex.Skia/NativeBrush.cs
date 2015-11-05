@@ -18,18 +18,32 @@ namespace Perspex.Skia
     internal unsafe struct NativeBrush
     {
         public const int MaxGradientStops = 1024;
+        public const int MaxDashCount = 1024;
         public NativeBrushType Type;
         public double Opacity;
         public uint Color;
+
+        //Strokes
         public bool Stroke;
         public float StrokeThickness;
-        
+        public PenLineJoin StrokeLineJoin;
+        public float StrokeMiterLimit;
+        public int StrokeDashCount;
+        public float StrokeDashOffset;
+        public PenLineCap StrokeLineCap;
+
+
+        //Gradients
         public int GradientStopCount;
         public GradientSpreadMethod GradientSpreadMethod;
         public SkiaPoint GradientStartPoint, GradientEndPoint;
         public float GradientRadius;
+
+        //Blobs
         public fixed uint GradientStopColors [MaxGradientStops];
         public fixed float GradientStops [MaxGradientStops];
+        public fixed float StrokeDashes [MaxDashCount];
+
         public void Reset()
         {
             Type = NativeBrushType.Solid;
@@ -38,6 +52,8 @@ namespace Perspex.Skia
             Stroke = false;
             StrokeThickness = 1;
             GradientStopCount = 0;
+            StrokeDashCount = 0;
+            StrokeLineCap = PenLineCap.Flat;
         }
         
     }

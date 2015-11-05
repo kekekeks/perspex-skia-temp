@@ -104,6 +104,22 @@ namespace Perspex.Skia
             var brush = CreateBrush(pen.Brush, targetSize);
             brush.Brush->Stroke = true;
             brush.Brush->StrokeThickness = (float)pen.Thickness;
+            brush.Brush->StrokeLineCap = pen.StartLineCap;
+            brush.Brush->StrokeMiterLimit = (float)pen.MiterLimit;
+
+            if (pen.DashStyle != null)
+            {
+                var dashes = pen.DashStyle.Dashes;
+                if (dashes.Count > NativeBrush.MaxDashCount)
+                    throw new NotSupportedException("Maximum supported dash count is " + NativeBrush.MaxDashCount);
+                brush.Brush->StrokeDashCount = dashes.Count;
+                for (int c = 0; c < dashes.Count; c++)
+                    brush.Brush->StrokeDashes[c] = (float) dashes[c];
+                brush.Brush->StrokeDashOffset = (float)pen.DashStyle.Offset;
+
+            }
+
+
             return brush;
         }
 

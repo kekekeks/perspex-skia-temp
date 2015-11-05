@@ -1,5 +1,6 @@
 #include "common.h"
 #include "SkGradientShader.h"
+#include "SkDashPathEffect.h"
 
 namespace libperspesk {
 	class BitmapContainer : public RenderTarget
@@ -48,6 +49,26 @@ namespace libperspesk {
 		{
 			paint.setStyle(SkPaint::kStroke_Style);
 			paint.setStrokeWidth(brush->StrokeThickness);
+			paint.setStrokeMiter(brush->StrokeMiterLimit);
+
+			SkPaint::Cap cap = SkPaint::Cap::kDefault_Cap;
+			if (brush->StrokeLineCap == plcRound)
+				cap = SkPaint::Cap::kRound_Cap;
+			if (brush->StrokeLineCap == plcSquare)
+				cap = SkPaint::Cap::kSquare_Cap;
+			paint.setStrokeCap(cap);
+
+			SkPaint::Join  join = SkPaint::Join::kBevel_Join;
+			if(brush->StrokeLineJoin == pnjMiter)
+				join = SkPaint::Join::kMiter_Join;
+			if (brush->StrokeLineJoin == pnjRound)
+				join = SkPaint::Join::kRound_Join;
+			paint.setStrokeJoin(join);
+
+			if(brush->StrokeDashCount != 0)
+			{
+				paint.setPathEffect(SkDashPathEffect::Create(brush->StrokeDashes, brush->StrokeDashCount, brush->StrokeDashOffset))->unref();
+			}
 		}
 		else
 			paint.setStyle(SkPaint::kFill_Style);

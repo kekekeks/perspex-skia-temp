@@ -37,6 +37,21 @@ namespace libperspesk {
 		grRepeat,
 	};
 
+	enum PerspexPenLineCap
+	{
+		plcFlat,
+		plcRound,
+		plcSquare,
+		plcTriangle,
+	};
+
+	enum PerspexPenLineJoin
+	{
+		pnjBevel,
+		pnjMiter,
+		pnjRound,
+	};
+
 	struct PerspexGeometryElement
 	{
 		PerspexGeometryElementType Type;
@@ -63,20 +78,32 @@ namespace libperspesk {
 	};
 
 #define PERSPEX_MAX_GRADIENT_STOPS 1024
+#define PERSPEX_MAX_DASHES 1024
 	struct PerspexBrush
 	{
 		PerspexBrushType Type;
 		double Opacity;
 		uint32_t Color;
+
+		//Strokes
 		bool Stroke;
 		float StrokeThickness;
+		PerspexPenLineJoin StrokeLineJoin;
+		float StrokeMiterLimit;
+		int StrokeDashCount;
+		float StrokeDashOffset;
+		PerspexPenLineCap StrokeLineCap;
 
+		//Gradients
 		int GradientStopCount;
 		PerspexGradientSpreadMethod GradientSpreadMethod;
 		SkPoint GradientStartPoint, GradientEndPoint;
 		float GradientRadius;
+
+		//Blobs
 		SkColor GradientStopColors[PERSPEX_MAX_GRADIENT_STOPS];
 		float GradientStops[PERSPEX_MAX_GRADIENT_STOPS];
+		float StrokeDashes[PERSPEX_MAX_DASHES];
 	};
 
 	struct PerspexBuffer
