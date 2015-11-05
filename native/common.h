@@ -16,11 +16,15 @@
 #ifdef LoadImage
 #undef LoadImage
 #endif
+
+#define pchar unsigned short
+
 using namespace libperspesk;
 namespace libperspesk
 {
 	extern GrContext* Context;
 
+	class FormattedText;
 	class BitmapContainer;
 	class RenderingContext
 	{
@@ -38,6 +42,7 @@ namespace libperspesk
 		virtual ~RenderTarget() {}
 	};
 
+	extern void ConfigurePaint(SkPaint& paint, RenderingContext*ctx, PerspexBrush*brush);
 
 	//Method table
 
@@ -56,7 +61,11 @@ namespace libperspesk
 	extern BitmapContainer* CreateRenderTargetBitmap(int width, int height);
 	extern void ResizeBitmap(BitmapContainer *bmp, int width, int height);
 	extern void DisposeImage(BitmapContainer* bmp);
-	
+	extern SkTypeface* CreateTypeface(char* name, int style);
+	extern FormattedText* CreateFormattedText(pchar* text, int len, SkTypeface* typeface, float fontSize, SkPaint::Align align, PerspexFormattedText**exp);
+	extern void RebuildFormattedText(FormattedText*txt);
+	extern void DestroyFormattedText(FormattedText* txt);
+	extern void DrawFormattedText(RenderingContext* ctx, PerspexBrush* brush, FormattedText* text, float x, float y);
 
 
 
@@ -125,7 +134,12 @@ namespace libperspesk
 		&CreateRenderTargetBitmap,
 		&ResizeBitmap,
 		&DisposeImage,
-		GetDrawingContextSettingsPtr,
+		&GetDrawingContextSettingsPtr,
+		&CreateTypeface,
+		&CreateFormattedText,
+		&RebuildFormattedText,
+		&DestroyFormattedText,
+		&DrawFormattedText,
 		0
 	};
 

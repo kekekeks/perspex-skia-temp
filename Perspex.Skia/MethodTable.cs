@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Runtime.InteropServices;
+using Perspex.Media;
 
 // ReSharper disable InconsistentNaming
 
@@ -130,6 +131,32 @@ namespace Perspex.Skia
 
         public _GetDrawingContextSettingsPtr GetDrawingContextSettingsPtr;
 
+
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        public delegate IntPtr _CreateTypeface(void* name, int style);
+
+        public _CreateTypeface CreateTypeface;
+
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        public delegate IntPtr _CreateFormattedText(void*utf16, int len, IntPtr typeface, float fontSize, TextAlignment align, NativeFormattedText** shared);
+
+        public _CreateFormattedText CreateFormattedText;
+
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        public delegate void _RebuildFormattedText(IntPtr handle);
+
+        public _RebuildFormattedText RebuildFormattedText;
+
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        public delegate void _DestroyFormattedText(IntPtr handle);
+
+        public _DestroyFormattedText DestroyFormattedText;
+
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        public delegate void _DrawFormattedText(IntPtr ctx, void* brush, IntPtr text, float x, float y);
+
+        public _DrawFormattedText DrawFormattedText;
+
         private static readonly Type[] TableOrder = new Type[]
         {
             typeof (_CreateRenderTarget),
@@ -154,7 +181,12 @@ namespace Perspex.Skia
             typeof (_CreateRenderTargetBitmap),
             typeof (_ResizeBitmap),
             typeof (_DisposeImage),
-            typeof (_GetDrawingContextSettingsPtr)
+            typeof (_GetDrawingContextSettingsPtr),
+            typeof (_CreateTypeface),
+            typeof (_CreateFormattedText),
+            typeof (_RebuildFormattedText),
+            typeof (_DestroyFormattedText),
+            typeof (_DrawFormattedText)
         };
 
 
@@ -181,6 +213,4 @@ namespace Perspex.Skia
 
         public Win32MethodTable() : base(GetPerspexMethodTable()) { }
     }
-
-    
 }

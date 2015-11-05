@@ -127,7 +127,9 @@ namespace Perspex.Skia
 
         public void DrawText(Brush foreground, Point origin, FormattedText text)
         {
-            throw new NotImplementedException();
+            using (var br = CreateBrush(foreground, text.Measure()))
+                MethodTable.Instance.DrawFormattedText(Handle, br.Brush, ((FormattedTextImpl) text.PlatformImpl).Handle,
+                    (float) origin.X, (float) origin.Y);
         }
 
 

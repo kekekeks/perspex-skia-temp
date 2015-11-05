@@ -274,7 +274,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <Optimization>MaxSpeed</Optimization>
+      <Optimization>Disabled</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>_ITERATOR_DEBUG_LEVEL=0;WIN32;NDEBUG;_WINDOWS;_USRDLL;PERSPEXSKIAWIN32NATIVE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -379,6 +379,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\native\formatted_text.cpp" />
     <ClCompile Include="..\native\main.cpp" />
     <ClCompile Include="..\native\path.cpp" />
     <ClCompile Include="..\native\rendering_context.cpp" />

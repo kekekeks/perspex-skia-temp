@@ -11,14 +11,17 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)BitmapImpl.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DrawingContextImpl.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)FormattedTextImpl.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MethodTable.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NativeBrush.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NativeDrawingContextSettings.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NativeFormattedText.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PerspexHandleHolder.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PlatformRenderInterface.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RenderTarget.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SkiaPoint.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)StreamGeometryImpl.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SkRect.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TypefaceCache.cs" />
   </ItemGroup>
 </Project>

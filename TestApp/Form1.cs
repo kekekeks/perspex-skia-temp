@@ -47,6 +47,13 @@ namespace TestApp
                 ctx.EndFigure(true);
             }
 
+            _text =
+                new FormattedText(
+                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
+                    "Arial", 25, FontStyle.Normal, TextAlignment.Left, FontWeight.Normal);
+
+            _text.Constraint = new Size(400, double.PositiveInfinity);
+
             using (var ctx = _rbitmap.CreateDrawingContext())
                 ctx.DrawRectangle(new Pen(new SolidColorBrush(Colors.Aqua)), new Rect(10, 10, 30, 30), 5);
 
@@ -88,7 +95,17 @@ namespace TestApp
         }
 
         int _frames = 0;
+        int _fps = 0;
         TimeSpan _lastFps;
+        private FormattedText _text;
+        string _textString;
+        Point _textPos = new Point(40, 40);
+
+        void UpdateTitle()
+        {
+            Text = "Highlighted: " + _textString + " FPS: " + _fps;
+        }
+
         protected override void WndProc(ref Message m)
         {
 
@@ -97,9 +114,10 @@ namespace TestApp
                 var now = Stopwatch.Elapsed;
                 if ((now - _lastFps).Seconds >= 1)
                 {
-                    Text = "FPS: " + _frames;
+                    _fps = _frames;
                     _frames = 0;
                     _lastFps = now;
+                    UpdateTitle();
                 }
                 _frames++;
 
@@ -107,16 +125,21 @@ namespace TestApp
                 using (var ctx = _renderTarget.CreateDrawingContext())
                 {
                     ctx.FillRectangle(Brushes.White, new Rect(0, 0, Width, Height));
-                    for(var x=0; x<Width; x+=40)
+                    ctx.FillRectangle(Brushes.Green, new Rect(_textPos, _text.Measure()));
+                    ctx.FillRectangle(Brushes.Blue, _textRect);
+                    ctx.DrawText(Brushes.Red, _textPos, _text);
+
+
+                    /*for(var x=0; x<Width; x+=40)
                         for (var y = 0; y < Height; y += 20)
                             ctx.FillRectangle(Brushes.Gray, new Rect(x + (y/20)%2*20, y, 20, 20));
-
-
+*/
+                    /*
                     _geometry.Transform = new MatrixTransform(GetTransform());
                     var rad = CreateRadialGradient();
                     rad.Opacity = 0.5;
                     ctx.DrawGeometry(rad, new Pen(CreateLinearGradient(), 4),
-                        _geometry);
+                        _geometry);*/
                     /*
                     using (ctx.PushPostTransform(GetTransform()))
                     {
@@ -130,6 +153,23 @@ namespace TestApp
                 return;
             }
             base.WndProc(ref m);
+        }
+
+        Rect _textRect;
+
+        protected override void OnMouseMove(MouseEventArgs e)
+        {
+            var res = _text.HitTestPoint(new Point(e.X, e.Y) - _textPos);
+            if (res.IsInside)
+            {
+                _textRect = _text.HitTestTextPosition(res.TextPosition);
+                _textRect = new Rect(_textRect.Position + _textPos, _textRect.Size);
+                _textString = _text.Text.Substring(res.TextPosition, 1);
+            }
+            else
+                _textRect = new Rect();
+            UpdateTitle();
+            base.OnMouseMove(e);
         }
 
         Matrix GetTransform()

@@ -18,6 +18,12 @@ namespace libperspesk {
 		brImage
 	};
 
+	enum PerspexFontStyle
+	{
+		fsNormal,
+		fsBold,
+		fsItalic
+	};
 
 	enum PerspexImageType
 	{
@@ -36,6 +42,24 @@ namespace libperspesk {
 		PerspexGeometryElementType Type;
 		SkPoint Points[3];
 		bool Flag;
+	};
+
+
+	struct PerspexFormattedTextLine
+	{
+		float Top;
+		int Start;
+		int Length;
+		float Height;
+		float Width;
+	};
+
+	struct PerspexFormattedText
+	{
+		float WidthConstraint;
+		int LineCount;
+		PerspexFormattedTextLine*Lines;
+		SkRect*CharRects;
 	};
 
 #define PERSPEX_MAX_GRADIENT_STOPS 1024

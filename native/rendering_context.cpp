@@ -21,12 +21,12 @@ namespace libperspesk {
 			}
 		};
 
-		virtual RenderingContext* CreateRenderingContext()
+		virtual RenderingContext* CreateRenderingContext() override
 		{
 			return new ImageRenderingContext(this);
 		}
 
-		virtual void Resize(int width, int height)
+		virtual void Resize(int width, int height) override
 		{
 			Bitmap.allocN32Pixels(width, height);
 		}
@@ -42,11 +42,8 @@ namespace libperspesk {
 		return SkShader::kClamp_TileMode;
 	}
 
-	inline SkPaint CreatePaint(RenderingContext*ctx, PerspexBrush*brush)
-	{
-		SkPaint paint;
-		
-		
+	extern void ConfigurePaint(SkPaint& paint, RenderingContext*ctx, PerspexBrush*brush)
+	{	
 		if (brush->Stroke)
 		{
 			paint.setStyle(SkPaint::kStroke_Style);
@@ -79,6 +76,12 @@ namespace libperspesk {
 		double opacity = brush->Opacity * ctx->Settings.Opacity;
 		paint.setAlpha(paint.getAlpha()*opacity);
 		paint.setAntiAlias(true);
+	}
+
+	inline SkPaint CreatePaint(RenderingContext*ctx, PerspexBrush*brush)
+	{
+		SkPaint paint;
+		ConfigurePaint(paint, ctx, brush);
 		return paint;
 	}
 

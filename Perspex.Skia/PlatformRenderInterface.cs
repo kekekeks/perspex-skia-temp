@@ -19,7 +19,7 @@ namespace Perspex.Skia
         public IFormattedTextImpl CreateFormattedText(string text, string fontFamilyName, double fontSize, FontStyle fontStyle,
             TextAlignment textAlignment, FontWeight fontWeight)
         {
-            throw new NotImplementedException();
+            return FormattedTextImpl.Create(text, fontFamilyName, fontSize, fontStyle, textAlignment, fontWeight);
         }
 
         public IStreamGeometryImpl CreateStreamGeometry()

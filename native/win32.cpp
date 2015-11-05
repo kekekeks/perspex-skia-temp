@@ -27,7 +27,7 @@ namespace libperspesk
 
 		}
 
-		virtual void Resize(int width, int height)
+		virtual void Resize(int width, int height) override
 		{
 			if (!isGpu)
 			{
@@ -40,7 +40,7 @@ namespace libperspesk
 		}
 
 
-		void Present()
+		void Present() const
 		{
 			if (!isGpu)
 			{
@@ -86,7 +86,7 @@ namespace libperspesk
 			}
 		};
 
-		virtual RenderingContext* CreateRenderingContext()
+		virtual RenderingContext* CreateRenderingContext() override
 		{
 			Surface->getCanvas()->restoreToCount(1);
 			Surface->getCanvas()->save();

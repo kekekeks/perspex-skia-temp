@@ -30,6 +30,9 @@
     <ClCompile Include="..\native\path.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\native\formatted_text.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\native\common.h">
