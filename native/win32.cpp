@@ -72,9 +72,9 @@ namespace libperspesk
 
 				desc.fRenderTargetHandle = buffer;
 
-				GrRenderTarget* target = ctx->textureProvider()->wrapBackendRenderTarget(desc);
-
+				SkAutoTUnref<GrRenderTarget> target(ctx->textureProvider()->wrapBackendRenderTarget(desc));
 				Surface.reset(SkSurface::NewRenderTargetDirect(target));
+				
 			}
 			else
 			{
