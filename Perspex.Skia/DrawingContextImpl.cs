@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Perspex.Media;
 using Perspex.Media.Imaging;
+using Perspex.RenderHelpers;
 
 namespace Perspex.Skia
 {
@@ -94,6 +95,21 @@ namespace Perspex.Skia
                 rv.Brush->Type = NativeBrushType.RadialGradient;
                 rv.Brush->GradientStartPoint = radialGradient.Center.ToPixels(targetSize);
                 rv.Brush->GradientRadius = (float)radialGradient.Radius;
+            }
+            var tileBrush = brush as TileBrush;
+            if (tileBrush != null)
+            {
+                rv.Brush->Type = NativeBrushType.Image;
+                var helper = new TileBrushImplHelper(tileBrush, targetSize);
+                var bitmap = new BitmapImpl((int) helper.IntermediateSize.Width, (int) helper.IntermediateSize.Height);
+                rv.AddDisposable(bitmap);
+                using (var ctx = bitmap.CreateDrawingContext())
+                    helper.DrawIntermediate(ctx);
+                rv.Brush->Bitmap = bitmap.Handle;
+                rv.Brush->BitmapTileMode = tileBrush.TileMode;
+                rv.Brush->BitmapTranslation = new SkiaPoint(-helper.DestinationRect.X, -helper.DestinationRect.Y);
+
+
             }
 
             return rv;

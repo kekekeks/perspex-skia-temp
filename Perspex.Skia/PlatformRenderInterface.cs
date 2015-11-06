@@ -56,7 +56,7 @@ namespace Perspex.Skia
                 throw new ArgumentException("Width can't be less than 1", nameof(width));
             if (height < 1)
                 throw new ArgumentException("Height can't be less than 1", nameof(height));
-            return new BitmapImpl(MethodTable.Instance.CreateRenderTargetBitmap(width, height), width, height);
+            return new BitmapImpl(width, height);
         }
 
         public IRenderTarget CreateRenderer(IPlatformHandle handle, double width, double height)

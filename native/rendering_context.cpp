@@ -82,16 +82,25 @@ namespace libperspesk {
 		else if(brush->Type == brRadialGradient)
 		{
 			paint.setAlpha(128);
-			//paint.setColor(SkColorSetARGB(255, 255, 255, 255));
 			paint.setShader(SkGradientShader::CreateRadial(brush->GradientStartPoint, brush->GradientRadius,
 				brush->GradientStopColors, brush->GradientStops,
 				brush->GradientStopCount, GetGradientTileMode(brush->GradientSpreadMethod)))->unref();
 		}
 		else if(brush->Type == brLinearGradient)
 		{
-			//paint.setColor(SkColorSetARGB(255, 255, 255, 255));
 			paint.setShader(SkGradientShader::CreateLinear(&brush->GradientStartPoint, brush->GradientStopColors, brush->GradientStops,
 				brush->GradientStopCount, GetGradientTileMode(brush->GradientSpreadMethod)))->unref();
+		}
+		else if(brush->Type == brImage)
+		{
+			SkMatrix matrix;
+			matrix.setTranslate(brush->BitmapTranslation);
+			paint.setShader(SkShader::CreateBitmapShader(brush->Bitmap->Bitmap,
+				brush->BitmapTileMode == ptmNone ? SkShader::kClamp_TileMode
+				: (brush->BitmapTileMode == ptmFlipX || brush->BitmapTileMode == ptmFlipXY) ? SkShader::kMirror_TileMode : SkShader::kRepeat_TileMode,
+				brush->BitmapTileMode == ptmNone ? SkShader::kClamp_TileMode
+				: (brush->BitmapTileMode == ptmFlipY || brush->BitmapTileMode == ptmFlipXY) ? SkShader::kMirror_TileMode : SkShader::kRepeat_TileMode,
+				&matrix))->unref();
 		}
 
 		double opacity = brush->Opacity * ctx->Settings.Opacity;

@@ -10,6 +10,9 @@ namespace Perspex.Skia
 {
     class BitmapImpl : PerspexHandleHolder, IRenderTargetBitmapImpl
     {
+        private int width;
+        private int height;
+
         public void Save(string fileName)
         {
             var ext = Path.GetExtension(fileName)?.ToLower();
@@ -49,6 +52,11 @@ namespace Perspex.Skia
         {
             PixelHeight = height;
             PixelWidth = width;
+        }
+
+        public BitmapImpl(int width, int height)
+            : this(MethodTable.Instance.CreateRenderTargetBitmap(width, height), width, height)
+        {
         }
     }
 }

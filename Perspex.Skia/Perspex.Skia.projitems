@@ -22,6 +22,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)SkiaPoint.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)StreamGeometryImpl.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SkRect.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TileBrushHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TypefaceCache.cs" />
   </ItemGroup>
 </Project>

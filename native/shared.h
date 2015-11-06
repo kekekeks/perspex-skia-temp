@@ -52,6 +52,15 @@ namespace libperspesk {
 		pnjRound,
 	};
 
+	enum PerspexTileMode
+	{
+		ptmNone,
+		ptmFlipX,
+		ptmFlipY,
+		ptmFlipXY,
+		ptmTile
+	};
+
 	struct PerspexGeometryElement
 	{
 		PerspexGeometryElementType Type;
@@ -77,6 +86,8 @@ namespace libperspesk {
 		SkRect*CharRects;
 	};
 
+	class BitmapContainer;
+
 #define PERSPEX_MAX_GRADIENT_STOPS 1024
 #define PERSPEX_MAX_DASHES 1024
 	struct PerspexBrush
@@ -99,6 +110,11 @@ namespace libperspesk {
 		PerspexGradientSpreadMethod GradientSpreadMethod;
 		SkPoint GradientStartPoint, GradientEndPoint;
 		float GradientRadius;
+
+		//Tiling
+		BitmapContainer*Bitmap;
+		PerspexTileMode BitmapTileMode;
+		SkPoint BitmapTranslation;
 
 		//Blobs
 		SkColor GradientStopColors[PERSPEX_MAX_GRADIENT_STOPS];

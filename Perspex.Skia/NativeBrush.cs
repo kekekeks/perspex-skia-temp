@@ -39,6 +39,11 @@ namespace Perspex.Skia
         public SkiaPoint GradientStartPoint, GradientEndPoint;
         public float GradientRadius;
 
+        //Image Brush
+        public IntPtr Bitmap;
+        public TileMode BitmapTileMode;
+        public SkiaPoint BitmapTranslation;
+
         //Blobs
         public fixed uint GradientStopColors [MaxGradientStops];
         public fixed float GradientStops [MaxGradientStops];
@@ -64,6 +69,8 @@ namespace Perspex.Skia
         private readonly NativeBrushPool _pool;
         public NativeBrush* Brush;
 
+        List<IDisposable> _disposables = new List<IDisposable>();
+
         public NativeBrushContainer(NativeBrushPool pool)
         {
             _pool = pool;
@@ -71,8 +78,16 @@ namespace Perspex.Skia
             Brush->Reset();
         }
 
+        public void AddDisposable(IDisposable disp)
+        {
+            _disposables.Add(disp);
+        }
+
         public void Dispose()
         {
+            foreach (var disp in _disposables)
+                disp.Dispose();
+            _disposables.Clear();
             Brush->Reset();
             _pool?.Return(this);
         }
