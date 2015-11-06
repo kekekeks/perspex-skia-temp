@@ -170,7 +170,7 @@ namespace libperspesk
 
 		~FormattedText()
 		{
-			
+			delete Data;
 		}
 	};
 
