@@ -22,7 +22,9 @@
 using namespace libperspesk;
 namespace libperspesk
 {
+	extern SkGLContext* GlContext;
 	extern GrContext* Context;
+	extern GrBackendContext GrBackend;
 
 	class FormattedText;
 	class BitmapContainer;
@@ -42,6 +44,7 @@ namespace libperspesk
 		virtual ~RenderTarget() {}
 	};
 
+	extern void CreateWin32GLContext();
 	extern void ConfigurePaint(SkPaint& paint, RenderingContext*ctx, PerspexBrush*brush);
 
 	//Method table
@@ -66,7 +69,6 @@ namespace libperspesk
 	extern void RebuildFormattedText(FormattedText*txt);
 	extern void DestroyFormattedText(FormattedText* txt);
 	extern void DrawFormattedText(RenderingContext* ctx, PerspexBrush* brush, FormattedText* text, float x, float y);
-
 
 
 #ifdef DEFINE_METHOD_TABLE

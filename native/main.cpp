@@ -1,9 +1,11 @@
 #define DEFINE_METHOD_TABLE
 #include "common.h"
+
 namespace libperspesk
 {
-	static SkGLContext* GlContext = NULL;
+	extern SkGLContext* GlContext = NULL;
 	extern GrContext* Context = NULL;
+	extern GrBackendContext GrBackend = NULL;
 	static bool Initialized = false;;
 	static void Init()
 	{
@@ -20,8 +22,8 @@ namespace libperspesk
 #endif
 		if (GlContext == nullptr || !GlContext->isValid())
 			return;
-		GrBackendContext backend = reinterpret_cast<GrBackendContext>(GlContext->gl());
-		Context = GrContext::Create(GrBackend::kOpenGL_GrBackend, backend);
+		GrBackend = reinterpret_cast<GrBackendContext>(GlContext->gl());
+		Context = GrContext::Create(GrBackend::kOpenGL_GrBackend, GrBackend);
 	}
 }
 

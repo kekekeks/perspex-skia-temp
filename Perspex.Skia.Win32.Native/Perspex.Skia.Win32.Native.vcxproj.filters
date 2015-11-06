@@ -33,12 +33,18 @@
     <ClCompile Include="..\native\formatted_text.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\native\angle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\native\common.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\native\shared.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\native\angle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

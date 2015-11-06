@@ -27,6 +27,8 @@ namespace libperspesk {
 				{
 					Surface.reset(SkSurface::NewRasterDirect(image->Bitmap.info(), image->Bitmap.getPixels(), image->Bitmap.rowBytes()));
 				}
+				
+				Surface.reset(SkSurface::NewRasterDirect(image->Bitmap.info(), image->Bitmap.getPixels(), image->Bitmap.rowBytes()));
 
 				Canvas = Surface->getCanvas();
 				Canvas->clear(SkColor());

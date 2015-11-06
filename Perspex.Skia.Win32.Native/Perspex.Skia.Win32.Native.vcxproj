@@ -137,7 +137,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>C:\skia\skia\skia\include\animator;C:\skia\skia\skia\include\c;C:\skia\skia\skia\include\codec;C:\skia\skia\skia\include\config;C:\skia\skia\skia\include\core;C:\skia\skia\skia\include\device;C:\skia\skia\skia\include\effects;C:\skia\skia\skia\include\gpu;C:\skia\skia\skia\include\images;C:\skia\skia\skia\include\pathops;C:\skia\skia\skia\include\pipe;C:\skia\skia\skia\include\ports;C:\skia\skia\skia\include\private;C:\skia\skia\skia\include\svg;C:\skia\skia\skia\include\utils;C:\skia\skia\skia\include\views;C:\skia\skia\skia\include\xml;;$(IncludePath)</IncludePath>
+    <IncludePath>C:\skia\skia\skia\include\animator;C:\skia\skia\skia\include\c;C:\skia\skia\skia\include\codec;C:\skia\skia\skia\include\config;C:\skia\skia\skia\include\core;C:\skia\skia\skia\include\device;C:\skia\skia\skia\include\effects;C:\skia\skia\skia\include\gpu;C:\skia\skia\skia\include\images;C:\skia\skia\skia\include\pathops;C:\skia\skia\skia\include\pipe;C:\skia\skia\skia\include\ports;C:\skia\skia\skia\include\private;C:\skia\skia\skia\include\svg;C:\skia\skia\skia\include\utils;C:\skia\skia\skia\include\views;C:\skia\skia\skia\third_party\externals\angle2\include;C:\skia\skia\skia\include\xml;$(IncludePath)</IncludePath>
     <LibraryPath>C:\skia\skia\skia\out\Release;C:\skia\skia\skia\out\Release\lib;$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)\$(ProjectName)\$(Configuration)\</OutDir>
   </PropertyGroup>
@@ -149,7 +149,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='XDebug|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>C:\skia\skia\skia\include\animator;C:\skia\skia\skia\include\c;C:\skia\skia\skia\include\codec;C:\skia\skia\skia\include\config;C:\skia\skia\skia\include\core;C:\skia\skia\skia\include\device;C:\skia\skia\skia\include\effects;C:\skia\skia\skia\include\gpu;C:\skia\skia\skia\include\images;C:\skia\skia\skia\include\pathops;C:\skia\skia\skia\include\pipe;C:\skia\skia\skia\include\ports;C:\skia\skia\skia\include\private;C:\skia\skia\skia\include\svg;C:\skia\skia\skia\include\utils;C:\skia\skia\skia\include\views;C:\skia\skia\skia\include\xml;;$(IncludePath)</IncludePath>
+    <IncludePath>C:\skia\skia\skia\include\animator;C:\skia\skia\skia\include\c;C:\skia\skia\skia\include\codec;C:\skia\skia\skia\include\config;C:\skia\skia\skia\include\core;C:\skia\skia\skia\include\device;C:\skia\skia\skia\include\effects;C:\skia\skia\skia\include\gpu;C:\skia\skia\skia\include\images;C:\skia\skia\skia\include\pathops;C:\skia\skia\skia\include\pipe;C:\skia\skia\skia\include\ports;C:\skia\skia\skia\include\private;C:\skia\skia\skia\include\svg;C:\skia\skia\skia\include\utils;C:\skia\skia\skia\include\views;C:\skia\skia\skia\third_party\externals\angle2\include;C:\skia\skia\skia\include\xml;$(IncludePath)</IncludePath>
     <LibraryPath>C:\skia\skia\skia\out\Release;C:\skia\skia\skia\out\Release\lib;$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)\$(ProjectName)\$(Configuration)\</OutDir>
   </PropertyGroup>
@@ -161,7 +161,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>C:\skia\skia\skia\include\animator;C:\skia\skia\skia\include\c;C:\skia\skia\skia\include\codec;C:\skia\skia\skia\include\config;C:\skia\skia\skia\include\core;C:\skia\skia\skia\include\device;C:\skia\skia\skia\include\effects;C:\skia\skia\skia\include\gpu;C:\skia\skia\skia\include\images;C:\skia\skia\skia\include\pathops;C:\skia\skia\skia\include\pipe;C:\skia\skia\skia\include\ports;C:\skia\skia\skia\include\private;C:\skia\skia\skia\include\svg;C:\skia\skia\skia\include\utils;C:\skia\skia\skia\include\views;C:\skia\skia\skia\include\xml;;$(IncludePath)</IncludePath>
+    <IncludePath>C:\skia\skia\skia\include\animator;C:\skia\skia\skia\include\c;C:\skia\skia\skia\include\codec;C:\skia\skia\skia\include\config;C:\skia\skia\skia\include\core;C:\skia\skia\skia\include\device;C:\skia\skia\skia\include\effects;C:\skia\skia\skia\include\gpu;C:\skia\skia\skia\include\images;C:\skia\skia\skia\include\pathops;C:\skia\skia\skia\include\pipe;C:\skia\skia\skia\include\ports;C:\skia\skia\skia\include\private;C:\skia\skia\skia\include\svg;C:\skia\skia\skia\include\utils;C:\skia\skia\skia\include\views;C:\skia\skia\skia\third_party\externals\angle2\include;C:\skia\skia\skia\include\xml;$(IncludePath)</IncludePath>
     <LibraryPath>C:\skia\skia\skia\out\Release;C:\skia\skia\skia\out\Release\lib;$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)\$(ProjectName)\$(Configuration)\</OutDir>
   </PropertyGroup>
@@ -379,6 +379,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\native\angle.cpp" />
     <ClCompile Include="..\native\formatted_text.cpp" />
     <ClCompile Include="..\native\main.cpp" />
     <ClCompile Include="..\native\path.cpp" />
@@ -418,6 +419,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\native\angle.h" />
     <ClInclude Include="..\native\shared.h" />
     <ClInclude Include="..\native\common.h" />
   </ItemGroup>
