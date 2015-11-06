@@ -1,6 +1,7 @@
 #include "common.h"
 #include "SkGradientShader.h"
 #include "SkDashPathEffect.h"
+#include "SkPicture.h"
 
 namespace libperspesk {
 	class BitmapContainer : public RenderTarget
@@ -13,12 +14,33 @@ namespace libperspesk {
 		public:
 			BitmapContainer* Image;
 			SkAutoTUnref<SkSurface> Surface;
+			bool IsGpu;
 			ImageRenderingContext(BitmapContainer*image)
 			{
 				Image = image;
-				Surface.reset(SkSurface::NewRasterDirect(image->Bitmap.info(), image->Bitmap.getPixels(), image->Bitmap.rowBytes()));
+				IsGpu = false;
+				if (Context != nullptr)
+					Surface.reset(SkSurface::NewRenderTarget(Context, SkSurface::kNo_Budgeted, Image->Bitmap.info()));
+				if (Surface.get() != nullptr)
+					IsGpu = true;
+				else
+				{
+					Surface.reset(SkSurface::NewRasterDirect(image->Bitmap.info(), image->Bitmap.getPixels(), image->Bitmap.rowBytes()));
+				}
+
 				Canvas = Surface->getCanvas();
 				Canvas->clear(SkColor());
+			}
+
+			~ImageRenderingContext()
+			{
+				if (IsGpu)
+				{
+					SkAutoTUnref<SkImage> image;
+					image.reset(Surface->newImageSnapshot(SkSurface::kNo_Budgeted));
+					image.get()->readPixels(Image->Bitmap.info(), Image->Bitmap.getPixels(), Image->Bitmap.rowBytes(), 0, 0);
+				}
+				Surface.reset(nullptr);
 			}
 		};
 
@@ -95,12 +117,12 @@ namespace libperspesk {
 		{
 			SkMatrix matrix;
 			matrix.setTranslate(brush->BitmapTranslation);
-			paint.setShader(SkShader::CreateBitmapShader(brush->Bitmap->Bitmap,
-				brush->BitmapTileMode == ptmNone ? SkShader::kClamp_TileMode
-				: (brush->BitmapTileMode == ptmFlipX || brush->BitmapTileMode == ptmFlipXY) ? SkShader::kMirror_TileMode : SkShader::kRepeat_TileMode,
-				brush->BitmapTileMode == ptmNone ? SkShader::kClamp_TileMode
-				: (brush->BitmapTileMode == ptmFlipY || brush->BitmapTileMode == ptmFlipXY) ? SkShader::kMirror_TileMode : SkShader::kRepeat_TileMode,
-				&matrix))->unref();
+			SkShader::TileMode tileX = brush->BitmapTileMode == ptmNone ? SkShader::kClamp_TileMode
+				: (brush->BitmapTileMode == ptmFlipX || brush->BitmapTileMode == ptmFlipXY) ? SkShader::kMirror_TileMode : SkShader::kRepeat_TileMode;
+			SkShader::TileMode tileY = brush->BitmapTileMode == ptmNone ? SkShader::kClamp_TileMode
+				: (brush->BitmapTileMode == ptmFlipY || brush->BitmapTileMode == ptmFlipXY) ? SkShader::kMirror_TileMode : SkShader::kRepeat_TileMode;
+			
+			paint.setShader(SkShader::CreateBitmapShader(brush->Bitmap->Bitmap, tileX, tileY, &matrix))->unref();
 		}
 
 		double opacity = brush->Opacity * ctx->Settings.Opacity;
